@@ -44,7 +44,7 @@
 
     <div class="form-gorup">
         <label for="ativo">Ativo</label>
-        <input type="checkbox" class="form-control" onchange="return setaValorAtivo()" name="ativo" id="ativo" <?php echo ($ativo == '0') ? '' : 'checked' ?> value="<?php echo isset($ativo) ? $ativo: set_value('ativo') ?>">
+        <input type="checkbox" class="form-control" onchange="return setaValorAtivo()" name="ativo" id="ativo" <?php echo (isset($ativo) && $ativo == '0') ? '' : 'checked' ?> value="<?php echo isset($ativo) ? $ativo: set_value('ativo') ?>">
     </div>
 
     <input type="hidden" name="codigo" value="<?php echo isset($codigo) ? $codigo : '' ?>">
