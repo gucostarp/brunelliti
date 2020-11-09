@@ -1,4 +1,7 @@
 <h2>Produtos</h2>
+<div class="row my-3">
+    <a href="/produtos/create" class="btn btn-primary">Cadastrar Produto</a>
+</div>
 <table class="table">
     <tr>
         <th>Código</th>
@@ -6,8 +9,8 @@
         <th>Descrição</th>
         <th>Preço</th>
         <th>Categoria</th>
-        <th>Ativo</th>
         <th>Quantidade</th>
+        <th>Ativo</th>
     </tr>
     <?php if (!empty($produtos) && is_array($produtos)): ?>
         <?php foreach ($produtos as $produtos_item) : ?>
