@@ -1,6 +1,8 @@
 <?php namespace App\Controllers;
 use CodeIgniter\Controller;
 use App\Models\ProdutosModel;
+use App\Models\CategoriasModel;
+
 
 class Produtos extends Controller
 {
@@ -18,9 +20,11 @@ class Produtos extends Controller
     }
 
     public function create() {
+        $categorias = new CategoriasModel();
+        $data['categorias'] = $categorias->getCategorias();
         helper('form');
         echo view('templates/header');
-        echo view('produtos/form');
+        echo view('produtos/form',$data);
         echo view('templates/footer');
     }
 
@@ -39,7 +43,6 @@ class Produtos extends Controller
                 'preco'        => $this->request->getVar('preco'),                
                 'descricao'    => $this->request->getVar('descricao'),                
                 'idCategoria'  => $this->request->getVar('idCategoria'), 
-                'nomeCategoria'=> $this->request->getVar('nomeCategoria'),
                 'ativo'        => $this->request->getVar('ativo'),                
                 'quantidade'   => $this->request->getVar('quantidade'),                
             ]);
@@ -57,7 +60,11 @@ class Produtos extends Controller
 
     public function edit($codigo = null) {
         $model = new ProdutosModel();
+        
+        $categorias = new CategoriasModel();
         $data['produtos'] = $model->getProdutos($codigo);
+        // $data['categorias'] = $categorias->getCategorias();
+
         if (empty($data['produtos'])) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Não pude encontrar esse produto: '.$codigo);
         }
@@ -69,6 +76,7 @@ class Produtos extends Controller
             'idCategoria'      => $data['produtos']['idCategoria'],
             'quantidade'       => $data['produtos']['quantidade'],
             'ativo'            => $data['produtos']['ativo'],
+            'categorias'       => $categorias->getCategorias()
         ];    
         echo view('templates/header');
         echo view('produtos/form', $data);

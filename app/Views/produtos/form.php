@@ -27,9 +27,23 @@
         <textarea rows="5" cols="33" class="form-control" name="descricao" id="descricao"><?php echo isset($descricao) ? $descricao : set_value('descricao') ?></textarea>
     </div>
     
-    <div class="form-gorup">
+    <!-- <div class="form-gorup">
         <label for="idCategoria">Categoria</label>
         <input type="select" class="form-control" name="idCategoria" id="idCategoria" value="<?php echo isset($idCategoria) ? $idCategoria: set_value('idCategoria') ?>">
+    </div> -->
+
+    <div class="form-gorup">
+        <label for="idCategoria">Categoria</label>
+        <select class="form-control" name="idCategoria" id="idCategoria">
+            <?php if (!empty($categorias) && is_array($categorias)): ?>
+                <?php foreach ($categorias as $categorias_item) : ?>
+                    <option value="<?php echo $categorias_item['id'] ?>" <?php echo (isset($idCategoria) && $idCategoria == $categorias_item['id']) ? 'selected' : '' ?>><?php echo $categorias_item['nome'] ?></option>
+                <?php endforeach; ?>    
+            <?php else : ?>
+                <option value="0" disabled>Nenhuma categoria cadastrada.</option>    
+            <?php endif; ?>
+        
+        </select>
     </div>
     
     <div class="form-gorup">
