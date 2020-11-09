@@ -1,3 +1,18 @@
+<script>
+    function setaValorAtivo(){
+        const elemento = document.getElementById('ativo')
+        if (elemento.checked){
+            elemento.value = 1;
+            
+        }else{
+            elemento.value = 0;
+        
+        }
+    }
+
+</script>
+
+
 <h2><?php echo isset($codigo) ? "Editando produto" : "Novo Produto" ?></h2>
 <?php echo \Config\Services::validation()->listErrors(); ?>
 
@@ -29,7 +44,7 @@
 
     <div class="form-gorup">
         <label for="ativo">Ativo</label>
-        <input type="checkbox" class="form-control" name="ativo" id="ativo" value="<?php (isset($ativo) && ($ativo ==1)) ? '' : 'disabled' ?>">
+        <input type="checkbox" class="form-control" onchange="return setaValorAtivo()" name="ativo" id="ativo" <?php echo ($ativo == '0') ? '' : 'checked' ?> value="<?php echo isset($ativo) ? $ativo: set_value('ativo') ?>">
     </div>
 
     <input type="hidden" name="codigo" value="<?php echo isset($codigo) ? $codigo : '' ?>">
