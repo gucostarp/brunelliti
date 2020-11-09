@@ -38,7 +38,8 @@ class Produtos extends Controller
                 'nome'       => $this->request->getVar('nome'),                
                 'preco'      => $this->request->getVar('preco'),                
                 'descricao'  => $this->request->getVar('descricao'),                
-                'idCategoria'=> $this->request->getVar('idCategoria'),                
+                'idCategoria'=> $this->request->getVar('idCategoria'), 
+                'nomeCategoria'=> $this->request->getVar('nomeCategoria'),
                 'ativo'      => $this->request->getVar('ativo'),                
                 'quantidade' => $this->request->getVar('quantidade'),                
             ]);
