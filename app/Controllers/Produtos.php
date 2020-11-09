@@ -74,6 +74,15 @@ class Produtos extends Controller
         echo view('templates/footer');
     }
 
+    public function delete($codigo = null) {
+        $model = new ProdutosModel();
+        $model->delete($codigo);
+
+        echo view('templates/header');
+        echo view('produtos/delete_success');
+        echo view('templates/footer');
+    }
+
 }
 
 
