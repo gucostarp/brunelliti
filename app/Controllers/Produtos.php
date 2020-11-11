@@ -22,16 +22,29 @@ class Produtos extends Controller
     public function overview()
 	{
         $busca = $this->request->getVar('busca');
+        $ativo = $this->request->getVar('ativo'); 
 
         $model = new ProdutosModel();
 
         $data = [
-            'produtos' => $model->getProdutos(null, $busca),
-            'busca' => $busca
+            'produtos' => $model->getProdutos(null, $busca, $ativo),
+            'busca' => $busca,
+            'ativo' => $ativo
         ];
 
         echo view('templates/header');
         echo view('produtos/overview',$data);
+        echo view('templates/footer');
+    }
+
+    public function view($codigo = null)
+	{
+        $model = new ProdutosModel();
+
+        $data['produtos'] = $model->getProdutos($codigo);
+
+        echo view('templates/header');
+        echo view('produtos/view',$data);
         echo view('templates/footer');
     }
 
@@ -79,7 +92,7 @@ class Produtos extends Controller
         
         $categorias = new CategoriasModel();
         $data['produtos'] = $model->getProdutos($codigo);
-        // $data['categorias'] = $categorias->getCategorias();
+        
 
         if (empty($data['produtos'])) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Não pude encontrar esse produto: '.$codigo);

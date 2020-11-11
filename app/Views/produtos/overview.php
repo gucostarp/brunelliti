@@ -5,9 +5,22 @@
         }
         return true;
     }
+
+    function setaValorAtivo(){
+        const elemento = document.getElementById('ativo')
+        if (elemento.checked){
+            elemento.value = 1;
+            
+        }else{
+            elemento.value = 0;
+        
+        }
+    }
+
 </script>
 
-<h2>Buscar  Produtos</h2>
+
+<h2>Consultar Produtos</h2>
 <table class="table">
     <tr>
         <td>
@@ -24,13 +37,19 @@
 </table>
 
 <form action="/produtos/overview" method="post">
-    <div class="form-group">
-        <label for="nome">Buscar por</label>
-        <input type="text" class="form-control" name="busca" id="busca" value="<?php echo isset($busca) ? $busca : '' ?>">
-    </div>
 
-    <div class="form-group">
-        <input type="submit" value="Buscar" class="btn btn-primary">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="ativo" name="ativo" onchange="return setaValorAtivo()" <?php echo (isset($ativo) && $ativo == '0') ? 'checked' : '' ?> value="<?php echo isset($ativo) ? $ativo: '0' ?>>
+        <label class="form-check-label" for="defaultCheck1">
+        Listar produtos inativos?
+        </label>     
+    </div>
+    
+    <div class="input-group mb-1">
+        <input type="text" class="form-control" placeholder="Digite algo para pesquisar" aria-label="busca" aria-describedby="button-addon1" id="busca" name="busca" value="<?php echo isset($busca) ? $busca : '' ?>">
+         <div class="input-group-prepend">
+         <button class="btn btn-primary" type="submit" value="buscar">Pesquisar</button>
+        </div>  
     </div>
 </form>
 
@@ -38,23 +57,17 @@
     <tr>
         <th>Código</th>
         <th>Produto</th>
-        <th>Descrição</th>
         <th>Preço</th>
         <th>Categoria</th>
-        <th>Quantidade</th>
-        <th>Ativo</th>
-        <th></th>
+        <th>Ação</th>
     </tr>
     <?php if (!empty($produtos) && is_array($produtos)): ?>
         <?php foreach ($produtos as $produtos_item) : ?>
         <tr>
-            <td><?php echo $produtos_item['codigo'] ?></td>
-            <td><?php echo $produtos_item['nome'] ?></td>
-            <td><?php echo $produtos_item['descricao'] ?></td>
-            <td><?php echo $produtos_item['preco'] ?></td>
-            <td><?php echo $produtos_item['nomeCategoria'] ?></td>
-            <td><?php echo $produtos_item['quantidade'] ?></td>
-            <td><?php echo $produtos_item['ativo'] ?></td>
+            <td><a href="/produtos/view/<?php echo $produtos_item['codigo'] ?>"><?php echo $produtos_item['codigo'] ?></a></td>
+            <td><a href="/produtos/view/<?php echo $produtos_item['codigo'] ?>"><?php echo $produtos_item['nome'] ?></a></td>
+            <td><a href="/produtos/view/<?php echo $produtos_item['codigo'] ?>"><?php echo $produtos_item['preco'] ?></a></td>
+            <td><a href="/produtos/view/<?php echo $produtos_item['codigo'] ?>"><?php echo $produtos_item['nomeCategoria'] ?></a></td>
             <td>
                 <a href="/produtos/edit/<?php echo $produtos_item['codigo'] ?>">Editar</a>
                 |
