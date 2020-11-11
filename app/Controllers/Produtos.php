@@ -15,6 +15,22 @@ class Produtos extends Controller
         ];
 
         echo view('templates/header');
+        echo view('produtos/main',$data);
+        echo view('templates/footer');
+    }
+
+    public function overview()
+	{
+        $busca = $this->request->getVar('busca');
+
+        $model = new ProdutosModel();
+
+        $data = [
+            'produtos' => $model->getProdutos(null, $busca),
+            'busca' => $busca
+        ];
+
+        echo view('templates/header');
         echo view('produtos/overview',$data);
         echo view('templates/footer');
     }

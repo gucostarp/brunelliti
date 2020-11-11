@@ -1,6 +1,22 @@
 <h2><?php echo isset($id) ? "Editando a categoria" : "Nova categoria" ?></h2>
 <?php echo \Config\Services::validation()->listErrors(); ?>
 
+<table class="table">
+    <tr>
+        <td>
+        <div class="row-my-1">
+            <a href="/categorias/index" class="btn btn-primary">Consultar Categorias</a>
+        </div>
+        </td>
+        <td>
+        <div class="row-my-1" style="text-align: right;">
+             <a href="/produtos/index" class="btn btn-success">Início</a>
+        </div>
+        </td>
+    </tr>
+</table>
+
+
 <form action="/categorias/store" method="post">
     <div class="form-group">
         <label for="nome">Nome</label>

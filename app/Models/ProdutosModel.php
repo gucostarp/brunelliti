@@ -16,10 +16,16 @@ class ProdutosModel extends Model {
     protected $deletedField = 'deleted_at';
     protected $useSoftDeletes = true;
     
-    public function getProdutos($codigo = null) {
+    public function getProdutos($codigo = null, $busca = null) {
         if ($codigo == null) {   
-            return $this->select('produtos.*, categoria.nome as nomeCategoria')->join('categoria','categoria.id = produtos.idCategoria')->findAll();
 
+            $resultados = $this->select('produtos.*, categoria.nome as nomeCategoria')->join('categoria','categoria.id = produtos.idCategoria');
+            
+            if ($busca != null){
+                $resultados = $resultados->like('produtos.nome', $busca);
+            }
+
+            return $resultados->findAll();
         }
         return $this->asArray()->where(['codigo' => $codigo])->first();
     }

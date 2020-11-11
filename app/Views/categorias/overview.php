@@ -11,19 +11,24 @@
 <table class="table">
     <tr>
         <td>
-        <div class="row my-1">
+        <div class="row-my-1">
             <a href="/categorias/create" class="btn btn-primary">Cadastrar Categoria</a>
         </div>
         </td>
-       
+        <td>
+        <div class="row-my-1" style="text-align: right;">
+             <a href="/produtos/index" class="btn btn-success">Início</a>
+        </div>
+        </td>
     </tr>
 </table>
 
 
-<table class="table table-striped table-sm">
+<table class="table table-striped table-sm" >
     <tr>
         <th>Código</th>
         <th>Categoria</th>
+        <th>
     </tr>
     <?php if (!empty($categorias) && is_array($categorias)): ?>
         <?php foreach ($categorias as $categorias_item) : ?>

@@ -7,22 +7,32 @@
     }
 </script>
 
-<h2>Produtos</h2>
+<h2>Buscar  Produtos</h2>
 <table class="table">
     <tr>
         <td>
-        <div class="row my-1">
+        <div class="row-my-1">
             <a href="/produtos/create" class="btn btn-primary">Cadastrar Produto</a>
         </div>
         </td>
         <td>
-        <div class="row my-1">
-             <a href="/produtos/create" class="btn btn-primary">Cadastrar Produto</a>
+        <div class="row-my-1" style="text-align: right;">
+             <a href="/produtos/index" class="btn btn-success">Início</a>
         </div>
         </td>
     </tr>
 </table>
 
+<form action="/produtos/overview" method="post">
+    <div class="form-group">
+        <label for="nome">Buscar por</label>
+        <input type="text" class="form-control" name="busca" id="busca" value="<?php echo isset($busca) ? $busca : '' ?>">
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Buscar" class="btn btn-primary">
+    </div>
+</form>
 
 <table class="table table-striped table-sm">
     <tr>
